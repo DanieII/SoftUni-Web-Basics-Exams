@@ -63,6 +63,7 @@ def recipe_details(request, id):
     recipe = get_object_or_404(Recipe, id=id)
     context = {
         'recipe': recipe,
+        'ingredients': recipe.ingredients.split(', ')
     }
 
     return render(request, 'details.html', context=context)
