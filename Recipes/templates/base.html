@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+    <body>
+        <nav>
+            <ul>
+                <img src="{% static 'images/chef.png' %}" alt="chef">
+                <li class="title"><a href="{% url 'home' %}">Recipes</a></li>
+                <li><a href="{% url 'create' %}">Add Recipe</a></li>
+            </ul>
+        </nav>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
