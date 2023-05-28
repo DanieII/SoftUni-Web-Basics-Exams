@@ -16,11 +16,11 @@
         <!-- Navigation -->
         <nav class="navbar">
             <section class="navbar-dashboard">
-                <a href="#">Dashboard</a>
+                <a href="{% url 'home' %}">Dashboard</a>
                 <div id="user">
                     <span>Welcome, Peter</span>
                     <a class="button" href="{% url 'add book' %}">Add Book</a>
-                    <a class="button" href="#">Profile</a>
+                    <a class="button" href="{% url 'profile details' %}">Profile</a>
                 </div>
             </section>
         </nav>

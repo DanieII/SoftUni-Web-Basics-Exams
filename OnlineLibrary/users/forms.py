@@ -12,3 +12,10 @@ class ProfileForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'image_url': forms.TextInput(attrs={'placeholder': 'URL'}),
         }
+
+
+class DeleteProfileForm(ProfileForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.disabled = True

@@ -9,27 +9,27 @@ from users.views import create_profile
 def get_books_by_3(books):
     result = []
     current = []
-    for i, book in enumerate(books, 1):
-        if len(current) < 3:
+    for i, book in enumerate(books):
+        if i % 3 != 0:
             current.append(book)
-            if i == len(books):
-                result.append(current)
         else:
             result.append(current)
-            current.clear()
+            current = [book]
+
+        if i + 1 == len(books):
+            result.append(current)
 
     return result
 
 
 def home(request):
     # For the exam there shouldn't be a login/register system and only one account needs to be created
-    try:
-        profile = Profile.objects.first()
-    except:
+    if p := Profile.objects.first():
+        profile = p
+    else:
         return create_profile(request)
 
     books = get_books_by_3(Book.objects.all())
-    print(books)
     context = {
         'books': books,
         'profile': profile,
