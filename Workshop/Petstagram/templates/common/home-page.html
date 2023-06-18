@@ -7,14 +7,16 @@
         <div class="col-9">
 
             <!-- Searchbar -->
-            <form class="searchbar" method="post">
-                <input type="text" placeholder="Search by pet name...">
+            <form class="searchbar" method="get" action="{% url 'search by pet name' %}">
+                {{ search_form }}
                 <button>
                     <img src="{% static "images/search.png" %}" height="18" alt="img2" >
                 </button>
             </form>
 
-            {% include 'common/pets-posts.html' %}
+            {% for photo in all_photos %}
+                {% include 'common/pet-post.html' with photo=photo %}
+            {% endfor %}
 
         </div>
     </div>

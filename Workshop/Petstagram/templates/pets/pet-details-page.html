@@ -14,10 +14,10 @@
                 <div class="personal">
                     <div class="edit">
                         <p>{{ pet.name }}</p>
-                        <a href="">
+                        <a href="{% url 'edit pet' 'USER HERE' pet.slug %}">
                             <img class="edit-img" src="{% static "images/edit-pen-icon-6.jpg" %}" alt="edit button">
                         </a>
-                        <a href="">
+                        <a href="{% url 'delete pet' 'USER HERE' pet.slug %}">
                             <img class="bin-img" src="{% static "images/icon-remove-22.jpg" %}" alt="bin button">
                         </a>
                     </div>
@@ -29,15 +29,11 @@
             </div>
         </div>
         <div class="pet-posts">
-            {% if all_photos %}
-                <!-- Start if pet photos -->
-                {% include 'common/pets-posts.html' %}
-                <!-- End if pet photos -->
-            {% else %}
-                <!-- Start if not pet photos -->
+            {% for photo in all_photos %}
+                {% include 'common/pet-post.html' with post=post %}
+            {% empty %}
                 <img class="no-posts" src="{% static "images/no_posts.png" %}" alt="no posts image">
-                <!-- End if not pet photos -->
-            {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

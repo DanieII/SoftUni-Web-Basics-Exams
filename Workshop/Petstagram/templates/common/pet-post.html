@@ -1,11 +1,10 @@
 {% load static %}
 
-{% for photo in all_photos %}
-    <div class="card">
+<div class="card">
         <div class="top">
             <!-- User Details and image location -->
             <div class="userDetails">
-                <a href="profile details">
+                <a href="{% url 'profile details' pk=1 %}">
                     <div class="profilepic">
                         <div class="profile_img">
                             <div class="image">
@@ -15,7 +14,7 @@
                     </div>
                 </a>
                 <h3>
-                    <a href="profile details">
+                    <a href="{% url 'profile details' pk=1 %}">
                         <!-- if user has first name and last name -->
                         Diyan Kalaydzhiev
                         <!-- else -->
@@ -32,7 +31,7 @@
         </div>
         <!-- Post image -->
         <div class="imgBx" id="{{ photo.id }}">
-            <img src="{% static "images/axolotl.jpeg" %}" alt="post" class="cover">
+            <img src="{{ photo.photo.url }}" alt="post" class="cover">
         </div>
         <!-- -->
 
@@ -108,8 +107,7 @@
 
             <!-- tagged pets -->
             {% for pet in photo.tagged_pets.all %}
-{#                {% url 'pet-details' "username" pet.slug %}"#}
-                <a href="{% url 'home' %}">
+                <a href="{% url 'pet details' "username" pet.slug %}">
                     <p class="message">
                         <b>{{ pet.name }}</b>
                     </p>
@@ -117,8 +115,7 @@
             {% endfor %}
             <!--  -->
 
-{#            {% url 'photo-details' photo.pk %}#}
-            <a href="{% url 'home' %}">
+            <a href="{% url 'photo details' photo.pk %}">
                 <h4 class="details">See details</h4>
             </a>
 
@@ -131,16 +128,12 @@
                         <i class="far fa-smile"></i>
                     </h3>
                 </div>
-                <form method="post" action="">
-                    <label for="id_body">Body:</label>
-                    <textarea name="body" cols="40" rows="10" placeholder="Add comment..." maxlength="300"
-                              required="" id="id_body"></textarea>
+                <form method="post" action="{% url 'comment' photo.id %}">
+                    {% csrf_token %}
+                    {{ comment_form }}
                     <button type="submit">Post</button>
                 </form>
             </div>
             <!--  -->
         </div>
     </div>
-{% empty %}
-    <img class="no-posts" src="{% static "images/no_posts.png" %}" alt="no posts image">
-{% endfor %}
