@@ -22,7 +22,7 @@ def add_pet(request):
         form = PetForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('profile details')
+            return redirect('profile details', pk=1)
     else:
         form = PetForm
 

@@ -19,7 +19,7 @@ def photo_details(request, pk):
 
 def add_photo(request):
     if request.method == 'POST':
-        form = PhotoForm(request.POST)
+        form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -50,6 +50,5 @@ def edit_photo(request, pk):
 
 def delete_photo(request, pk):
     photo = Photo.objects.get(pk=pk)
-    if request.method == 'POST':
-        photo.delete()
-        return redirect('home')
+    photo.delete()
+    return redirect('home')
